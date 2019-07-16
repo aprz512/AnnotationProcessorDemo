@@ -84,9 +84,9 @@ public class NewIntentProcessor extends AbstractProcessor {
                 MethodSpec intentMethod = MethodSpec
                         .methodBuilder(METHOD_PREFIX + activityName)
                         .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                        .returns(classIntent)
+                        .returns(void.class)
                         .addParameter(classContext, "context")
-                        .addStatement("return new $T($L, $L)", classIntent, "context", activityClass + ".class")
+                        .addStatement("$L.startActivity(new $T($L, $L))", "context", classIntent, "context", activityClass + ".class")
                         .build();
                 navigatorClass.addMethod(intentMethod);
             }
